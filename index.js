@@ -102,39 +102,42 @@ function storeToken(token) {
  */
 function listEvents(auth) {
   var calendar = google.calendar('v3');
-  calendar.calendarList.list({
-    auth: auth,
-  }, function(err, response) {
+  calendar.calendarList.list({  // call for the list of all your calendars
+    auth: auth,  // pass the authentication
+  }, function(err, response) { // function that is ran after you recieve the list.
     if (err) {
       console.log('The API returned an error: ' + err);
-      return;
-    }
-    var items = response.items;
+      return; // basic error handling
+    } 
+    var items = response.items; // the items of the list, these are all the calendars.
+    var calendarID = items[i].id;
 
-    for(let i = 0; i < items.length; i++){
+    for(let i = 0; i < items.length; i++){ // for every calendar, we grab it ID and look at all the events in said calendar.
       calendar.events.list({
         auth: auth,
         calendarId: items[i].id,
         timeMin: (new Date()).toISOString(),
         maxResults: 9999,
         singleEvents: true,
-        orderBy: 'startTime'
+        orderBy: 'startTime' // not too sure what most of these do, calendar id is obvious, max results stands for the amount of events you can get per calendar.
       }, function(err, response) {
         if (err) {
           console.log('The API returned an error: ' + err);
-          return;
+          return;// error handling
         }
-        var events = response.items;
+        var events = response.items; // the items of the list, these are all the events that are located in the calendar
         if (events.length == 0) {
-          console.log(`No upcoming events found from ${items[i].summary} \n ----------`);
+          console.log(`No upcoming events found from ${items[i].summary} \n ----------`);// no events found
         } else {
-          console.log(`Upcoming events from ${items[i].summary}`);
+          console.log(`Upcoming events from ${items[i].summary} \nCalendar id: ${calendarID}`);// events founds, display the calendar name.
           for (var j = 0; j < events.length; j++) {
             var event = events[j];
-            var start = event.start.dateTime || event.start.date;
-            console.log(`${start} | ${event.summary}`);
+            var start = event.start.dateTime || event.start.date; // starting date + time of the event
+            var end = event.end.dateTime || event.end.date; // ending time + date from the event
+            var id = event.id; // the id of the event
+            console.log(`${j + 1}: ${start} to ${end} \n${event.summary} \nid: ${id}`); // display the events.
           }
-          console.log("----------");
+          console.log("----------"); // a nice spacer so the console looks more organized 
         }
       });
     }
