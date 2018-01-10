@@ -110,9 +110,8 @@ function listEvents(auth) {
       return; // basic error handling
     } 
     var items = response.items; // the items of the list, these are all the calendars.
-    var calendarID = items[i].id;
-
-    for(let i = 0; i < items.length; i++){ // for every calendar, we grab it ID and look at all the events in said calendar.
+    
+    for(let i = 0; i < items.length; i++){ // for every calendar, we grab its ID and look at all the events in said calendar.
       calendar.events.list({
         auth: auth,
         calendarId: items[i].id,
@@ -127,10 +126,10 @@ function listEvents(auth) {
         }
         var events = response.items; // the items of the list, these are all the events that are located in the calendar
         if (events.length == 0) {
-          console.log(`No upcoming events found from ${items[i].summary} \n ----------`);// no events found
+          console.log(`No upcoming events found from ${items[i].summary} \n Calendar id: ${items[i].id}\n ----------`);// no events found
         } else {
-          console.log(`Upcoming events from ${items[i].summary} \nCalendar id: ${calendarID}`);// events founds, display the calendar name.
-          for (var j = 0; j < events.length; j++) {
+          console.log(`Upcoming events from ${items[i].summary} \nCalendar id: ${items[i].id}`);// events founds, display the calendar name.
+          for (var j = 0; j < events.length; j++) { // loop through the events
             var event = events[j];
             var start = event.start.dateTime || event.start.date; // starting date + time of the event
             var end = event.end.dateTime || event.end.date; // ending time + date from the event
