@@ -1,14 +1,14 @@
-var fs = require('fs'); //require filesystem
-var readline = require('readline'); // require readline, more than likely used to read a users input from the command line. 
-var google = require('googleapis'); // require the google api 
-var googleAuth = require('google-auth-library'); // require the google authentication libary
+var fs = require('fs'); 
+var readline = require('readline'); 
+var google = require('googleapis'); 
+var googleAuth = require('google-auth-library'); 
 
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json
-var SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']; //the scope used to read data from your calendars, this scope is only able to read, NOT write.
+var SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-    process.env.USERPROFILE) + '.credentials/'; // locate the directiory where the token is stored (the folder)
-var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json'; // set the path, this is the folder plus the file name.
+    process.env.USERPROFILE) + '.credentials/'; 
+var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json'; 
 
 // Load client secrets from a local file.
 fs.readFile('client_secret.json', function processClientSecrets(err, content) {
@@ -18,7 +18,7 @@ fs.readFile('client_secret.json', function processClientSecrets(err, content) {
   }
   // Authorize a client with the loaded credentials, then call the
   // Google Calendar API.
-  authorize(JSON.parse(content), listEvents); // read the file called client_secret.json. if no errors, then authorize the oauth client. (see function authoriz)
+  authorize(JSON.parse(content), listEvents); 
 });
 
 /**
@@ -95,37 +95,49 @@ function storeToken(token) {
   console.log('Token stored to ' + TOKEN_PATH);
 }
 
-
-
 /**
- * Lists the next 10 events on the user's primary calendar.
+ * List all of the events from all your calendars (up to 9999 results per calendar, if you want this higher alter the "maxResults" option.)
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function listEvents(auth) {
   var calendar = google.calendar('v3');
-  calendar.events.list({
+  calendar.calendarList.list({
     auth: auth,
-    calendarId: '5memop556qadnunto0sut6k0v4@group.calendar.google.com',
-    timeMin: (new Date()).toISOString(),
-    maxResults: 9999,
-    singleEvents: true,
-    orderBy: 'startTime'
   }, function(err, response) {
     if (err) {
       console.log('The API returned an error: ' + err);
       return;
     }
-    var events = response.items;
-    if (events.length == 0) {
-      console.log('No upcoming events found.');
-    } else {
-      console.log('Upcoming events:');
-      for (var i = 0; i < events.length; i++) {
-        var event = events[i];
-        var start = event.start.dateTime || event.start.date;
-        console.log(start, event.summary);
-      }
+    var items = response.items;
+
+    for(let i = 0; i < items.length; i++){
+      calendar.events.list({
+        auth: auth,
+        calendarId: items[i].id,
+        timeMin: (new Date()).toISOString(),
+        maxResults: 9999,
+        singleEvents: true,
+        orderBy: 'startTime'
+      }, function(err, response) {
+        if (err) {
+          console.log('The API returned an error: ' + err);
+          return;
+        }
+        var events = response.items;
+        if (events.length == 0) {
+          console.log(`No upcoming events found from ${items[i].summary} \n ----------`);
+        } else {
+          console.log(`Upcoming events from ${items[i].summary}`);
+          for (var j = 0; j < events.length; j++) {
+            var event = events[j];
+            var start = event.start.dateTime || event.start.date;
+            console.log(`${start} | ${event.summary}`);
+          }
+          console.log("----------");
+        }
+      });
     }
+    
   });
 }
