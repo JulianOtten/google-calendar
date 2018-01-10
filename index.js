@@ -140,7 +140,6 @@ function listEvents(auth) {
           console.log("----------"); // a nice spacer so the console looks more organized 
         }
       });
-    }
-    
+    } 
   });
 }
