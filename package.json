@@ -1,0 +1,25 @@
+{
+  "name": "google-calendar-application",
+  "version": "1.0.0",
+  "description": "An application that pulls all the events from all of your google calendars.",
+  "main": "index.js",
+  "dependencies": {
+    "google-auth-library": "^0.12.0",
+    "googleapis": "^23.0.0",
+    "snekfetch": "^3.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kingotten/google-calendar.git"
+  },
+  "author": "Julian Otten",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kingotten/google-calendar/issues"
+  },
+  "homepage": "https://github.com/kingotten/google-calendar#readme"
+}
