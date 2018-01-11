@@ -7,6 +7,7 @@
     "google-auth-library": "^0.12.0",
     "googleapis": "^23.0.0",
     "mysql2": "^1.5.1",
+    "nodemon": "^1.14.10",
     "snekfetch": "^3.6.1"
   },
   "devDependencies": {},
