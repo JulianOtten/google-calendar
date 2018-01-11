@@ -11,4 +11,5 @@ npm install googleapis --save
 npm install googleapis --save
 5. Visit [this](https://developers.google.com/google-apps/calendar/quickstart/nodejs) link and follow: **Step 1: Turn on the Google Calendar API** carefully.
 6. Make sure you rename the client_secret**lostOfRandomCharacters**.json to client\_secret.json, else the application wont work!
-7. Run the start.bat file, visit the url it provides you with, and enter the code. You might have to run the application again after that. This application will not ask you for a code everytime you use it.
+7. Import the SQL file onto your database and edit the database connection in db_connect.
+8. Run the start.bat file, visit the url it provides you with, and enter the code. You might have to run the application again after that. This application will not ask you for a code everytime you use it.
