@@ -6,10 +6,8 @@ How to install:
 1. Install node.js on your system. Download node [here](https://nodejs.org/en/)
 2. Create a workspace. (the easiest way of doing this, is cloning this github repo onto your system)
 3. Install the github files. (skip this step if you cloned the repository)
-4. Open a command prompt in your workspace, shift + right click and open a terminal. Enter the following commands:
-4. npm install googleapis --save 
-4. npm install google-auth-library@0.* --save
-4. npm install mysql2 --save
+4. Open a command prompt in your workspace, shift + right click and open a terminal. Enter the following command:
+4. npm install googleapis google-auth-library@0.* mysql2 -S
 5. Visit [this](https://developers.google.com/google-apps/calendar/quickstart/nodejs) link and follow: **Step 1: Turn on the Google Calendar API** carefully.
 6. Make sure you rename the client_secret**lostOfRandomCharacters**.json to client\_secret.json, else the application wont work!
 7. Import the SQL file onto your database and edit the database connection in db_connect.
