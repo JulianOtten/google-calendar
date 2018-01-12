@@ -169,10 +169,10 @@ function listEvents(auth) {
             } // get event descripion if there is one. all the variables up here are for the sql line.
             //sql code here
             connection.query(
-              `SELECT * FROM events WHERE event_id = "${event_id}"`,
+              `SELECT * FROM events WHERE event_id = "${event_id}"`, // check for duplicate id's
               function(err, rows) {
                 if(err) throw err;
-                if(rows[0].event_id == event_id){
+                if(!rows.length < 1){ // if rows is not lower than one (so if there is an id) update the id
                   connection.query(
                     `UPDATE events SET calendar_id="${calendar_id}",start_date="${start_full}",end_date="${end_full}",calendar_name="${calendar_name}",event_title="${event_name}",event_description="${event_description}" WHERE event_id ="${event_id}"`,
                     function(err, rows){
@@ -180,7 +180,7 @@ function listEvents(auth) {
                       console.log("Succesfully updated the database!");
                     }
                   );
-                 } else {
+                 } else { // else, insert it into the database
                    connection.query(
                      `INSERT INTO events (event_id, calendar_id, start_date, end_date, calendar_name, event_title, event_description) VALUES ("${event_id}","${calendar_id}","${start_full}","${end_full}","${calendar_name}","${event_name}","${event_description}")`,
                      function(err, rows){
