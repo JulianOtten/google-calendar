@@ -198,5 +198,34 @@ function listEvents(auth) {
       });
     } 
   });
+  deleteOld();
 }
  
+/**
+ * Function written to delete all of the old/useless records that are in the database.
+ */
+
+function deleteOld() {
+  let date = Date.now();
+  connection.query(
+    `SELECT * FROM events`,
+    function(err, rows) { 
+      // code stuff
+      for (let i = 0; i < rows.length; i++) {
+          let r = rows[i];
+          let db_time = r.end_date;
+          let time = new Date(db_time).getTime();
+          let toDelete = r.event_id;
+          if(time < date){
+              console.log(i +": true");
+              connection.query(
+                  `DELETE FROM events WHERE event_id = "${toDelete}"`,
+                  function(err, rows){
+                      if(err) throw err;
+                      console.log("succesfully deleted useless result");
+                  }
+              );
+          }
+      }
+    });
+}
