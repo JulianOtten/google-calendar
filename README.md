@@ -3,7 +3,7 @@ This is an application that will be used to pull data from a google calendar and
 
 How to install:
 
-1. Install node.js on your system.
+1. Install node.js on your system. Download node [here](https://nodejs.org/en/)
 2. Create a workspace. (the easiest way of doing this, is cloning this github repo onto your system)
 3. Install the github files. (skip this step if you cloned the repository)
 4. Open a command prompt in your workspace, shift + right click and open a terminal. Enter the following commands:
