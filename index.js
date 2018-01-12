@@ -200,3 +200,14 @@ function listEvents(auth) {
   });
 }
  
+/**
+ * Function written to delete all of the old/useless records that are in the database.
+ */
+
+function deleteOld() {
+  connection.query(
+    `SELECT * FROM events WHERE end`,
+    function(err, rows) {
+      // code stuff
+    });
+}
