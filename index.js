@@ -2,6 +2,20 @@ var fs = require('fs');
 var readline = require('readline'); 
 var google = require('googleapis'); 
 var googleAuth = require('google-auth-library'); 
+const mysql = require('mysql2');
+const db_conn = require('./db_connect.json') // require database connection details
+
+let db_host = db_conn.host;
+let db_user = db_conn.user;
+let db_database = db_conn.database;
+let db_password = db_conn.password;
+
+const connection = mysql.createConnection({
+  host: db_host,
+  user: db_user,
+  database: db_database,
+  password: db_password
+}); // login on database
 
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json
@@ -126,15 +140,66 @@ function listEvents(auth) {
         }
         var events = response.items; // the items of the list, these are all the events that are located in the calendar
         if (events.length == 0) {
-          console.log(`No upcoming events found from ${items[i].summary} \n Calendar id: ${items[i].id}\n ----------`);// no events found
+          console.log(`No upcoming events found from ${items[i].summary} \nCalendar id: ${items[i].id}\n----------`);// no events found
         } else {
-          console.log(`Upcoming events from ${items[i].summary} \nCalendar id: ${items[i].id}`);// events founds, display the calendar name.
+          //console.log(`Upcoming events from ${items[i].summary} \nCalendar id: ${items[i].id}`);// events founds, display the calendar name.
           for (var j = 0; j < events.length; j++) { // loop through the events
             var event = events[j];
             var start = event.start.dateTime || event.start.date; // starting date + time of the event
             var end = event.end.dateTime || event.end.date; // ending time + date from the event
             var id = event.id; // the id of the event
-            console.log(`${j + 1}: ${start} to ${end} \n${event.summary} \nid: ${id}`); // display the events.
+            //console.log(`${j + 1}: ${start} to ${end} \n${event.summary} \nid: ${id}`); // display the events.
+            
+            let start_date = start.split("T")[0]; 
+            let start_time = start.split("T")[1].split("+")[0]; 
+            let end_date = end.split("T")[0];
+            let end_time = end.split("T")[1].split("+")[0];
+            //split the string so it matches the datetime field
+            let start_full = `${start_date} ${start_time}`; // set the string so it matches the datetime field
+            let end_full = `${end_date} ${end_time}`;
+            let event_id = id; // get event id 
+            let calendar_id = items[i].id; // get calendar id
+            let calendar_name = items[i].summary; // get calendar name. 
+            let event_name = event.summary; // get event name
+            let event_description; 
+            if(event.description){
+              console.log(event.description);
+              event_description = event.description;
+            } else {
+              event_description = ""
+            } // get event descripion if there is one. all the variables up here are for the sql line.
+            console.log("++++++++++");
+            console.log(`${start_full} \n${end_full} \n${event_id} \n${calendar_id} \n${calendar_name} \n${event_name} \n${event_description}`);
+            console.log("++++++++++")
+            //sql code here
+            connection.query(
+              `SELECT * FROM events WHERE event_id = "${event_id}"`,
+              function(err, rows) {
+                if(err) throw err;
+                console.log("rows")
+                if(rows[0].event_id == event_id){
+                  console.log("UPDATE");
+                  connection.query(
+                    `UPDATE events SET calendar_id="${calendar_id}",start_date="${start_full}",end_date="${end_full}",calendar_name="${calendar_name}",event_title="${event_name}",event_description="${event_description}" WHERE event_id ="${event_id}"`,
+                    function(err, rows){
+                      if(err) throw err;
+
+                      console.log("Succesfully updated the database!");
+                    }
+                  );
+                 } else {
+                   console.log("INSERT");
+                   connection.query(
+                     `INSERT INTO events (event_id, calendar_id, start_date, end_date, calendar_name, event_title, event_description) VALUES ("${event_id}","${calendar_id}","${start_full}","${end_full}","${calendar_name}","${event_name}","${event_description}")`,
+                     function(err, rows){
+                       if(err) throw err;
+                       console.log("Succesfully added event to the database!");
+                     }
+                   );
+                 }
+               }
+            );
+
           }
           console.log("----------"); // a nice spacer so the console looks more organized 
         }
@@ -142,3 +207,4 @@ function listEvents(auth) {
     } 
   });
 }
+ 
