@@ -142,13 +142,13 @@ function listEvents(auth) {
         if (events.length == 0) {
           console.log(`No upcoming events found from ${items[i].summary} \nCalendar id: ${items[i].id}\n----------`);// no events found
         } else {
-          //console.log(`Upcoming events from ${items[i].summary} \nCalendar id: ${items[i].id}`);// events founds, display the calendar name.
+          console.log(`Upcoming events from ${items[i].summary} \nCalendar id: ${items[i].id}`);// events founds, display the calendar name.
           for (var j = 0; j < events.length; j++) { // loop through the events
             var event = events[j];
             var start = event.start.dateTime || event.start.date; // starting date + time of the event
             var end = event.end.dateTime || event.end.date; // ending time + date from the event
             var id = event.id; // the id of the event
-            //console.log(`${j + 1}: ${start} to ${end} \n${event.summary} \nid: ${id}`); // display the events.
+            console.log(`${j + 1}: ${start} to ${end} \n${event.summary} \nid: ${id}`); // display the events.
             
             let start_date = start.split("T")[0]; 
             let start_time = start.split("T")[1].split("+")[0]; 
@@ -163,32 +163,24 @@ function listEvents(auth) {
             let event_name = event.summary; // get event name
             let event_description; 
             if(event.description){
-              console.log(event.description);
               event_description = event.description;
             } else {
               event_description = ""
             } // get event descripion if there is one. all the variables up here are for the sql line.
-            console.log("++++++++++");
-            console.log(`${start_full} \n${end_full} \n${event_id} \n${calendar_id} \n${calendar_name} \n${event_name} \n${event_description}`);
-            console.log("++++++++++")
             //sql code here
             connection.query(
               `SELECT * FROM events WHERE event_id = "${event_id}"`,
               function(err, rows) {
                 if(err) throw err;
-                console.log("rows")
                 if(rows[0].event_id == event_id){
-                  console.log("UPDATE");
                   connection.query(
                     `UPDATE events SET calendar_id="${calendar_id}",start_date="${start_full}",end_date="${end_full}",calendar_name="${calendar_name}",event_title="${event_name}",event_description="${event_description}" WHERE event_id ="${event_id}"`,
                     function(err, rows){
                       if(err) throw err;
-
                       console.log("Succesfully updated the database!");
                     }
                   );
                  } else {
-                   console.log("INSERT");
                    connection.query(
                      `INSERT INTO events (event_id, calendar_id, start_date, end_date, calendar_name, event_title, event_description) VALUES ("${event_id}","${calendar_id}","${start_full}","${end_full}","${calendar_name}","${event_name}","${event_description}")`,
                      function(err, rows){
