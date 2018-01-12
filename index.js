@@ -208,18 +208,17 @@ function listEvents(auth) {
 function deleteOld() {
   let date = Date.now();
   connection.query(
-    `SELECT * FROM events`,
+    `SELECT * FROM events`, // select all the events
     function(err, rows) { 
       // code stuff
-      for (let i = 0; i < rows.length; i++) {
-          let r = rows[i];
-          let db_time = r.end_date;
-          let time = new Date(db_time).getTime();
-          let toDelete = r.event_id;
-          if(time < date){
-              console.log(i +": true");
+      for (let i = 0; i < rows.length; i++) { // loop through the events
+          let r = rows[i]; 
+          let db_time = r.end_date; 
+          let time = new Date(db_time).getTime(); // convert the database string to a javascript time format for comparing
+          let toDelete = r.event_id;// grab the id of the event that has to be deleted
+          if(time < date){   // if the Database time is lower than the current time 
               connection.query(
-                  `DELETE FROM events WHERE event_id = "${toDelete}"`,
+                  `DELETE FROM events WHERE event_id = "${toDelete}"`, // delete the event
                   function(err, rows){
                       if(err) throw err;
                       console.log("succesfully deleted useless result");
