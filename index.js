@@ -161,8 +161,8 @@ function listEvents(auth) {
             let calendar_id = items[i].id; // get calendar id
             let calendar_name = items[i].summary; // get calendar name. 
             let event_name = event.summary; // get event name
-            let status = event.status;
-            let updated = event.updated;
+            let status = event.status; // get events status: cancelled || confirmed
+            let updated = event.updated; // get the date the event was last updated at
             let event_description; 
             if(event.description){
               event_description = event.description;
