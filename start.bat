@@ -1,2 +1,2 @@
-nodemon .
+node .
 pause
