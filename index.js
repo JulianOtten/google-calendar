@@ -132,6 +132,7 @@ function listEvents(auth) {
         timeMin: (new Date()).toISOString(),
         maxResults: 9999,
         singleEvents: true,
+        showDeleted: true,
         orderBy: 'startTime' // not too sure what most of these do, calendar id is obvious, max results stands for the amount of events you can get per calendar.
       }, function(err, response) {
         if (err) {
@@ -161,6 +162,8 @@ function listEvents(auth) {
             let calendar_id = items[i].id; // get calendar id
             let calendar_name = items[i].summary; // get calendar name. 
             let event_name = event.summary; // get event name
+            let status = event.status; // get events status: cancelled || confirmed
+            let updated = event.updated; // get the date the event was last updated at
             let event_description; 
             if(event.description){
               event_description = event.description;
@@ -173,14 +176,31 @@ function listEvents(auth) {
               function(err, rows) {
                 if(err) throw err;
                 if(!rows.length < 1){ // if rows is not lower than one (so if there is an id) update the id
-                  connection.query(
-                    `UPDATE events SET calendar_id="${calendar_id}",start_date="${start_full}",end_date="${end_full}",calendar_name="${calendar_name}",event_title="${event_name}",event_description="${event_description}" WHERE event_id ="${event_id}"`,
-                    function(err, rows){
-                      if(err) throw err;
-                      console.log("Succesfully updated the database!");
-                    }
-                  );
+                  console.log(`rows lenght: ${rows.length}`)
+                  if(status == 'cancelled'){                    
+                    //delete
+                    console.log('reached cancelled if ')
+                    connection.query(
+                      `DELETE FROM events WHERE event_id = "${event_id}"`, // delete the event
+                      function(err, rows){
+                          if(err) throw err;
+                          console.log("succesfully deleted useless result");
+                      }
+                    );
+
+                  } else {
+                    //update
+                    connection.query(
+                      `UPDATE events SET calendar_id="${calendar_id}",start_date="${start_full}",end_date="${end_full}",calendar_name="${calendar_name}",event_title="${event_name}",event_description="${event_description}" WHERE event_id ="${event_id}"`,
+                      function(err, rows){
+                        if(err) throw err;
+                        console.log("Succesfully updated the database!");
+                      }
+                    );
+                  }
+                  
                  } else { // else, insert it into the database
+                  if(status == 'confirmed'){ 
                    connection.query(
                      `INSERT INTO events (event_id, calendar_id, start_date, end_date, calendar_name, event_title, event_description) VALUES ("${event_id}","${calendar_id}","${start_full}","${end_full}","${calendar_name}","${event_name}","${event_description}")`,
                      function(err, rows){
@@ -189,6 +209,7 @@ function listEvents(auth) {
                      }
                    );
                  }
+                }
                }
             );
 
@@ -198,7 +219,7 @@ function listEvents(auth) {
       });
     } 
   });
-  deleteOld();
+  //deleteOld();
 }
  
 /**
