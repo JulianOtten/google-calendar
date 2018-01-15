@@ -161,6 +161,8 @@ function listEvents(auth) {
             let calendar_id = items[i].id; // get calendar id
             let calendar_name = items[i].summary; // get calendar name. 
             let event_name = event.summary; // get event name
+            let status = event.status;
+            let updated = event.updated;
             let event_description; 
             if(event.description){
               event_description = event.description;
@@ -173,6 +175,11 @@ function listEvents(auth) {
               function(err, rows) {
                 if(err) throw err;
                 if(!rows.length < 1){ // if rows is not lower than one (so if there is an id) update the id
+                  if(status == 'cancelled'){
+                    //delete
+                  } else {
+                    //update
+                  }
                   connection.query(
                     `UPDATE events SET calendar_id="${calendar_id}",start_date="${start_full}",end_date="${end_full}",calendar_name="${calendar_name}",event_title="${event_name}",event_description="${event_description}" WHERE event_id ="${event_id}"`,
                     function(err, rows){

@@ -1,0 +1,450 @@
+{
+    "kind": "calendar#events",
+    "etag": "\"p32kd16sppvctg0g\"",
+    "summary": "kingotten_99@hotmail.nl",
+    "updated": "2018-01-15T09:07:55.817Z",
+    "timeZone": "Europe/Amsterdam",
+    "accessRole": "owner",
+    "defaultReminders": [
+     {
+      "method": "popup",
+      "minutes": 10
+     }
+    ],
+    "nextSyncToken": "CKjQm5nP2dgCEKjQm5nP2dgCGAU=",
+    "items": [
+     {
+      "kind": "calendar#event",
+      "etag": "\"3023888596016000\"",
+      "id": "614d8h4qdvpmco41sd7r4oesht",
+      "status": "cancelled",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NjE0ZDhoNHFkdnBtY280MXNkN3I0b2VzaHQga2luZ290dGVuOTliQG0",
+      "created": "2017-11-29T08:31:23.000Z",
+      "updated": "2017-11-29T08:31:38.008Z",
+      "summary": "13",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2017-12-03T22:00:00+01:00"
+      },
+      "end": {
+       "dateTime": "2017-12-03T23:00:00+01:00"
+      },
+      "iCalUID": "614d8h4qdvpmco41sd7r4oesht@google.com",
+      "sequence": 1,
+      "reminders": {
+       "useDefault": true
+      }
+     },
+     {
+      "kind": "calendar#event",
+      "etag": "\"3023888597524000\"",
+      "id": "5f0v2bjtrqs4oig1415l1e29c3",
+      "status": "cancelled",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NWYwdjJianRycXM0b2lnMTQxNWwxZTI5YzMga2luZ290dGVuOTliQG0",
+      "created": "2017-11-29T08:31:28.000Z",
+      "updated": "2017-11-29T08:31:38.762Z",
+      "summary": "14",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2017-12-03T23:00:00+01:00"
+      },
+      "end": {
+       "dateTime": "2017-12-04T00:00:00+01:00"
+      },
+      "iCalUID": "5f0v2bjtrqs4oig1415l1e29c3@google.com",
+      "sequence": 1,
+      "reminders": {
+       "useDefault": true
+      }
+     },
+     {
+      "kind": "calendar#event",
+      "etag": "\"3023888635236000\"",
+      "id": "58ucj3g1bio06gjl644lk2j128",
+      "status": "cancelled",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NTh1Y2ozZzFiaW8wNmdqbDY0NGxrMmoxMjgga2luZ290dGVuOTliQG0",
+      "created": "2017-11-29T08:31:54.000Z",
+      "updated": "2017-11-29T08:31:57.618Z",
+      "summary": "14",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2017-12-03T23:00:00+01:00"
+      },
+      "end": {
+       "dateTime": "2017-12-04T00:00:00+01:00"
+      },
+      "iCalUID": "58ucj3g1bio06gjl644lk2j128@google.com",
+      "sequence": 1,
+      "reminders": {
+       "useDefault": true
+      }
+     },
+     {
+      "kind": "calendar#event",
+      "etag": "\"3024234929086000\"",
+      "id": "64o5s3hcjhp5elkreltge7tftb",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NjRvNXMzaGNqaHA1ZWxrcmVsdGdlN3RmdGIga2luZ290dGVuOTliQG0",
+      "created": "2017-12-01T08:37:44.000Z",
+      "updated": "2017-12-01T08:37:44.543Z",
+      "summary": "test1",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2017-12-01T10:30:00+01:00"
+      },
+      "end": {
+       "dateTime": "2017-12-01T11:30:00+01:00"
+      },
+      "iCalUID": "64o5s3hcjhp5elkreltge7tftb@google.com",
+      "sequence": 0,
+      "reminders": {
+       "useDefault": true
+      }
+     },
+     {
+      "kind": "calendar#event",
+      "etag": "\"3024234939462000\"",
+      "id": "3vl0dg5sae9243nh2c10ugou4h",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=M3ZsMGRnNXNhZTkyNDNuaDJjMTB1Z291NGgga2luZ290dGVuOTliQG0",
+      "created": "2017-12-01T08:37:49.000Z",
+      "updated": "2017-12-01T08:37:49.731Z",
+      "summary": "test 2",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2017-12-01T13:00:00+01:00"
+      },
+      "end": {
+       "dateTime": "2017-12-01T14:00:00+01:00"
+      },
+      "iCalUID": "3vl0dg5sae9243nh2c10ugou4h@google.com",
+      "sequence": 0,
+      "reminders": {
+       "useDefault": true
+      }
+     },
+     {
+      "kind": "calendar#event",
+      "etag": "\"3024234945852000\"",
+      "id": "12i4v0fgu87hf8qffig0sfi3nr",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=MTJpNHYwZmd1ODdoZjhxZmZpZzBzZmkzbnIga2luZ290dGVuOTliQG0",
+      "created": "2017-12-01T08:37:52.000Z",
+      "updated": "2017-12-01T08:37:52.926Z",
+      "summary": "test 3",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2017-12-01T16:30:00+01:00"
+      },
+      "end": {
+       "dateTime": "2017-12-01T17:30:00+01:00"
+      },
+      "iCalUID": "12i4v0fgu87hf8qffig0sfi3nr@google.com",
+      "sequence": 0,
+      "reminders": {
+       "useDefault": true
+      }
+     },
+     {
+      "kind": "calendar#event",
+      "etag": "\"3024945614644000\"",
+      "id": "7o2f1gila893eaoqq4nv4bdupj",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=N28yZjFnaWxhODkzZWFvcXE0bnY0YmR1cGoga2luZ290dGVuOTliQG0",
+      "created": "2017-12-05T11:20:07.000Z",
+      "updated": "2017-12-05T11:20:07.322Z",
+      "summary": "test",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2017-12-09T18:00:00+01:00"
+      },
+      "end": {
+       "dateTime": "2017-12-09T19:00:00+01:00"
+      },
+      "iCalUID": "7o2f1gila893eaoqq4nv4bdupj@google.com",
+      "sequence": 0,
+      "reminders": {
+       "useDefault": true
+      }
+     },
+     {
+      "kind": "calendar#event",
+      "etag": "\"3031512802218000\"",
+      "id": "59sgot5gsilbmfujak0olfifv2",
+      "status": "cancelled",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NTlzZ290NWdzaWxibWZ1amFrMG9sZmlmdjIga2luZ290dGVuOTliQG0",
+      "created": "2018-01-08T14:34:46.000Z",
+      "updated": "2018-01-12T11:26:41.109Z",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2018-01-12T12:30:00+01:00"
+      },
+      "end": {
+       "dateTime": "2018-01-12T13:30:00+01:00"
+      },
+      "iCalUID": "59sgot5gsilbmfujak0olfifv2@google.com",
+      "sequence": 1,
+      "reminders": {
+       "useDefault": true
+      }
+     },
+     {
+      "kind": "calendar#event",
+      "etag": "\"3031525634058000\"",
+      "id": "59rh0u2k7d7ghsg82gc1avaijs",
+      "status": "cancelled",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NTlyaDB1Mms3ZDdnaHNnODJnYzFhdmFpanMga2luZ290dGVuOTliQG0",
+      "created": "2018-01-12T13:12:42.000Z",
+      "updated": "2018-01-12T13:13:37.029Z",
+      "summary": "test",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2018-01-11T14:00:00+01:00"
+      },
+      "end": {
+       "dateTime": "2018-01-11T15:00:00+01:00"
+      },
+      "iCalUID": "59rh0u2k7d7ghsg82gc1avaijs@google.com",
+      "sequence": 1,
+      "reminders": {
+       "useDefault": true
+      }
+     },
+     {
+      "kind": "calendar#event",
+      "etag": "\"3031536864934000\"",
+      "id": "7r489m1smuecbs40oge7jl8gtj",
+      "status": "cancelled",
+      "htmlLink": "https://www.google.com/calendar/event?eid=N3I0ODltMXNtdWVjYnM0MG9nZTdqbDhndGoga2luZ290dGVuOTliQG0",
+      "created": "2018-01-08T09:46:59.000Z",
+      "updated": "2018-01-12T14:47:12.467Z",
+      "summary": "test",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2018-01-12T14:15:00+01:00"
+      },
+      "end": {
+       "dateTime": "2018-01-12T14:18:00+01:00"
+      },
+      "iCalUID": "7r489m1smuecbs40oge7jl8gtj@google.com",
+      "sequence": 2,
+      "reminders": {
+       "useDefault": true
+      }
+     },
+     {
+      "kind": "calendar#event",
+      "etag": "\"3031536896222000\"",
+      "id": "685vs8jfhnu47fa23qifke9fkr",
+      "status": "cancelled",
+      "htmlLink": "https://www.google.com/calendar/event?eid=Njg1dnM4amZobnU0N2ZhMjNxaWZrZTlma3Iga2luZ290dGVuOTliQG0",
+      "created": "2018-01-10T14:56:05.000Z",
+      "updated": "2018-01-12T14:47:28.111Z",
+      "summary": "Some title",
+      "description": "boop",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2018-01-14T08:30:00+01:00"
+      },
+      "end": {
+       "dateTime": "2018-01-14T09:30:00+01:00"
+      },
+      "iCalUID": "685vs8jfhnu47fa23qifke9fkr@google.com",
+      "sequence": 1,
+      "reminders": {
+       "useDefault": true
+      }
+     },
+     {
+      "kind": "calendar#event",
+      "etag": "\"3031536899708000\"",
+      "id": "4beurfknb0ef5355fojkc98f07",
+      "status": "cancelled",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NGJldXJma25iMGVmNTM1NWZvamtjOThmMDcga2luZ290dGVuOTliQG0",
+      "created": "2018-01-12T09:13:50.000Z",
+      "updated": "2018-01-12T14:47:29.854Z",
+      "summary": "somebody once told me the world was gonna roll me ",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2018-01-15T19:30:00+01:00"
+      },
+      "end": {
+       "dateTime": "2018-01-15T20:30:00+01:00"
+      },
+      "iCalUID": "4beurfknb0ef5355fojkc98f07@google.com",
+      "sequence": 1,
+      "reminders": {
+       "useDefault": true
+      }
+     },
+     {
+      "kind": "calendar#event",
+      "etag": "\"3031537318378000\"",
+      "id": "10lvn15oh5m276jnpvsrm5hmif",
+      "status": "cancelled",
+      "htmlLink": "https://www.google.com/calendar/event?eid=MTBsdm4xNW9oNW0yNzZqbnB2c3JtNWhtaWYga2luZ290dGVuOTliQG0",
+      "created": "2018-01-11T10:53:31.000Z",
+      "updated": "2018-01-12T14:50:59.189Z",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2018-01-25T13:00:00+01:00"
+      },
+      "end": {
+       "dateTime": "2018-01-31T14:00:00+01:00"
+      },
+      "iCalUID": "10lvn15oh5m276jnpvsrm5hmif@google.com",
+      "sequence": 1,
+      "reminders": {
+       "useDefault": true
+      }
+     },
+     {
+      "kind": "calendar#event",
+      "etag": "\"3032014551294000\"",
+      "id": "5ha3japt2ogiilvs5d3a7f5p89",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NWhhM2phcHQyb2dpaWx2czVkM2E3ZjVwODkga2luZ290dGVuOTliQG0",
+      "created": "2018-01-15T09:07:55.000Z",
+      "updated": "2018-01-15T09:07:55.647Z",
+      "creator": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "organizer": {
+       "email": "kingotten99b@gmail.com",
+       "displayName": "King Otten",
+       "self": true
+      },
+      "start": {
+       "dateTime": "2018-01-15T11:30:00+01:00"
+      },
+      "end": {
+       "dateTime": "2018-01-15T12:30:00+01:00"
+      },
+      "iCalUID": "5ha3japt2ogiilvs5d3a7f5p89@google.com",
+      "sequence": 0,
+      "reminders": {
+       "useDefault": true
+      }
+     }
+    ]
+   }
+   
