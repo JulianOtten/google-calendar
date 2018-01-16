@@ -115,6 +115,52 @@ function storeToken(token) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function listEvents(auth) {
+  updateGoogle(auth);
+  updateDB(auth);
+  //deleteOld();
+}
+ 
+function updateGoogle(auth) {
+  var calendar = google.calendar('v3');
+
+  connection.query(
+    `SELECT * FROM events`,
+    function(err, rows) {
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        //let the varialble process begin!!!
+        
+        let end_date = row.end_date;
+        let start_date = row.start_date;
+
+        let data = {
+          "end": {
+            "dateTime": end_date,
+            "timeZone": "CET"
+          },
+          "start": {
+            "dateTime": start_date,
+            "timeZone": "CET"
+          },
+          summary: row.event_title,
+          descripion: row.event_description
+        }
+
+        calendar.events.update({  // call for the list of all your calendars
+          auth: auth,  // pass the authentication
+          calendarId: row.calendar_id,
+          eventId: row.event_id,
+          resource: data
+        }, function(err, response) {
+          if(err) throw err;
+          console.log("updated google!");
+        });
+      }
+    }      
+  );
+}
+
+function updateDB(auth) {
   var calendar = google.calendar('v3');
   calendar.calendarList.list({  // call for the list of all your calendars
     auth: auth,  // pass the authentication
@@ -182,11 +228,11 @@ function listEvents(auth) {
                     connection.query(
                       `DELETE FROM events WHERE event_id = "${event_id}"`, // delete the event
                       function(err, rows){
-                          if(err) throw err;
-                          console.log("succesfully deleted useless result");
+                        if(err) throw err;
+                        console.log("succesfully deleted useless result");
                       }
                     );
-
+                    
                   } else {
                     //update
                     connection.query(
@@ -198,29 +244,27 @@ function listEvents(auth) {
                     );
                   }
                   
-                 } else { // else, insert it into the database
+                } else { // else, insert it into the database
                   if(status == 'confirmed'){ 
-                   connection.query(
-                     `INSERT INTO events (event_id, calendar_id, start_date, end_date, calendar_name, event_title, event_description) VALUES ("${event_id}","${calendar_id}","${start_full}","${end_full}","${calendar_name}","${event_name}","${event_description}")`,
-                     function(err, rows){
-                       if(err) throw err;
+                    connection.query(
+                      `INSERT INTO events (event_id, calendar_id, start_date, end_date, calendar_name, event_title, event_description) VALUES ("${event_id}","${calendar_id}","${start_full}","${end_full}","${calendar_name}","${event_name}","${event_description}")`,
+                      function(err, rows){
+                        if(err) throw err;
                        console.log("Succesfully added event to the database!");
-                     }
-                   );
+                      }
+                    );
                  }
                 }
                }
-            );
+              );
 
+            }
+            console.log("----------"); // a nice spacer so the console looks more organized 
           }
-          console.log("----------"); // a nice spacer so the console looks more organized 
-        }
       });
     } 
   });
-  //deleteOld();
 }
- 
 /**
  * Function written to delete all of the old/useless records that are in the database.
  */
