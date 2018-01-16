@@ -176,7 +176,6 @@ function listEvents(auth) {
               function(err, rows) {
                 if(err) throw err;
                 if(!rows.length < 1){ // if rows is not lower than one (so if there is an id) update the id
-                  console.log(`rows lenght: ${rows.length}`)
                   if(status == 'cancelled'){                    
                     //delete
                     console.log('reached cancelled if ')
