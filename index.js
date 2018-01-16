@@ -117,6 +117,7 @@ function storeToken(token) {
 function listEvents(auth) {
   updateGoogle(auth);
   //updateDB(auth);
+  //deleteOld();
 }
  
 function updateGoogle(auth) {
