@@ -116,7 +116,7 @@ function storeToken(token) {
  */
 function listEvents(auth) {
   updateGoogle(auth);
-  //updateDB(auth);
+  updateDB(auth);
   //deleteOld();
 }
  
@@ -129,6 +129,32 @@ function updateGoogle(auth) {
       for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
         //let the varialble process begin!!!
+        
+        let end_date = row.end_date;
+        let start_date = row.start_date;
+
+        let data = {
+          "end": {
+            "dateTime": end_date,
+            "timeZone": "CET"
+          },
+          "start": {
+            "dateTime": start_date,
+            "timeZone": "CET"
+          },
+          summary: row.event_title,
+          descripion: row.event_description
+        }
+
+        calendar.events.update({  // call for the list of all your calendars
+          auth: auth,  // pass the authentication
+          calendarId: row.calendar_id,
+          eventId: row.event_id,
+          resource: data
+        }, function(err, response) {
+          if(err) throw err;
+          console.log("updated google!");
+        });
       }
     }      
   );
