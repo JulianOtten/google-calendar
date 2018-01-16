@@ -19,7 +19,7 @@ const connection = mysql.createConnection({
 
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json
-var SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
+var SCOPES = ['https://www.googleapis.com/auth/calendar'];
 var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
     process.env.USERPROFILE) + '.credentials/'; 
 var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json'; 
@@ -176,7 +176,6 @@ function listEvents(auth) {
               function(err, rows) {
                 if(err) throw err;
                 if(!rows.length < 1){ // if rows is not lower than one (so if there is an id) update the id
-                  console.log(`rows lenght: ${rows.length}`)
                   if(status == 'cancelled'){                    
                     //delete
                     console.log('reached cancelled if ')
