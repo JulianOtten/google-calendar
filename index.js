@@ -114,13 +114,70 @@ function storeToken(token) {
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
-function listEvents(auth) {
-  updateGoogle(auth);
-  updateDB(auth);
-  //deleteOld();
+async function listEvents(auth) {
+    deleteRemovedEvents(auth);
+    setTimeout(updateGoogle,5000, auth);
+    setTimeout(updateDB,10000, auth);
+    //await deleteOld();
 }
  
-function updateGoogle(auth) {
+async function deleteRemovedEvents(auth){
+  var calendar = google.calendar('v3');
+  calendar.calendarList.list({
+    auth: auth
+  }, function(err, response){
+    if(err){
+      console.log('The API returned an error: ' + err);
+      return;
+    }
+    var items = response.items;
+    for (let i = 0; i < items.length; i++) {
+      calendar.events.list({
+        auth: auth,
+        calendarId: items[i].id,
+        timeMin: (new Date()).toISOString(),
+        maxResults: 9999,
+        singleEvents: true,
+        showDeleted: true,
+        orderBy: 'starttime'
+      }, function(err, response){
+        if (err){
+          console.log('The API returned an error '+ err);
+          return;
+        }
+        var events = response.items;
+        if(events.length == 0){
+
+        } else {
+          for (let j = 0; j < events.length; j++) {
+            const event = events[j];
+            connection.query(
+              `SELECT * FROM events WHERE event_id = "${event.id}"`, // check for duplicate id's
+              function(err, rows) {
+                if(err) throw err;
+                if(!rows.length < 1){ // if rows is not lower than one (so if there is an id) update the id
+                  if(event.status == 'cancelled'){                    
+                    connection.query(
+                      `DELETE FROM events WHERE event_id = "${event.id}"`, // delete the event
+                      function(err, rows){
+                        if(err) throw err;
+                        console.log("succesfully deleted useless result");
+                      }
+                    );
+                  }
+                }
+              }
+            );
+          }
+        }
+      })
+      
+    }
+  })
+}
+
+
+async function updateGoogle(auth) {
   var calendar = google.calendar('v3');
 
   connection.query(
@@ -160,7 +217,7 @@ function updateGoogle(auth) {
   );
 }
 
-function updateDB(auth) {
+async function updateDB(auth) {
   var calendar = google.calendar('v3');
   calendar.calendarList.list({  // call for the list of all your calendars
     auth: auth,  // pass the authentication
@@ -179,7 +236,7 @@ function updateDB(auth) {
         maxResults: 9999,
         singleEvents: true,
         showDeleted: true,
-        orderBy: 'startTime' // not too sure what most of these do, calendar id is obvious, max results stands for the amount of events you can get per calendar.
+        orderBy: 'startTime' 
       }, function(err, response) {
         if (err) {
           console.log('The API returned an error: ' + err);
@@ -187,15 +244,12 @@ function updateDB(auth) {
         }
         var events = response.items; // the items of the list, these are all the events that are located in the calendar
         if (events.length == 0) {
-          console.log(`No upcoming events found from ${items[i].summary} \nCalendar id: ${items[i].id}\n----------`);// no events found
         } else {
-          console.log(`Upcoming events from ${items[i].summary} \nCalendar id: ${items[i].id}`);// events founds, display the calendar name.
           for (var j = 0; j < events.length; j++) { // loop through the events
             var event = events[j];
             var start = event.start.dateTime || event.start.date; // starting date + time of the event
             var end = event.end.dateTime || event.end.date; // ending time + date from the event
             var id = event.id; // the id of the event
-            console.log(`${j + 1}: ${start} to ${end} \n${event.summary} \nid: ${id}`); // display the events.
             
             let start_date = start.split("T")[0]; 
             let start_time = start.split("T")[1].split("+")[0]; 
@@ -222,19 +276,6 @@ function updateDB(auth) {
               function(err, rows) {
                 if(err) throw err;
                 if(!rows.length < 1){ // if rows is not lower than one (so if there is an id) update the id
-                  if(status == 'cancelled'){                    
-                    //delete
-                    console.log('reached cancelled if ')
-                    connection.query(
-                      `DELETE FROM events WHERE event_id = "${event_id}"`, // delete the event
-                      function(err, rows){
-                        if(err) throw err;
-                        console.log("succesfully deleted useless result");
-                      }
-                    );
-                    
-                  } else {
-                    //update
                     connection.query(
                       `UPDATE events SET calendar_id="${calendar_id}",start_date="${start_full}",end_date="${end_full}",calendar_name="${calendar_name}",event_title="${event_name}",event_description="${event_description}" WHERE event_id ="${event_id}"`,
                       function(err, rows){
@@ -242,8 +283,6 @@ function updateDB(auth) {
                         console.log("Succesfully updated the database!");
                       }
                     );
-                  }
-                  
                 } else { // else, insert it into the database
                   if(status == 'confirmed'){ 
                     connection.query(
@@ -257,9 +296,7 @@ function updateDB(auth) {
                 }
                }
               );
-
             }
-            console.log("----------"); // a nice spacer so the console looks more organized 
           }
       });
     } 
@@ -269,7 +306,7 @@ function updateDB(auth) {
  * Function written to delete all of the old/useless records that are in the database.
  */
 
-function deleteOld() {
+async function deleteOld() {
   let date = Date.now();
   connection.query(
     `SELECT * FROM events`, // select all the events
@@ -291,4 +328,4 @@ function deleteOld() {
           }
       }
     });
-}
+  }
