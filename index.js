@@ -118,7 +118,8 @@ async function listEvents(auth) {
     deleteRemovedEvents(auth);
     setTimeout(updateGoogle,5000, auth);
     setTimeout(updateDB,10000, auth);
-    //await deleteOld();
+    //setTimeout(deleteOld, 15000, auth);
+    setTimeout(function(){console.log("Done running script!")}, 20000);
 }
  
 async function deleteRemovedEvents(auth){
